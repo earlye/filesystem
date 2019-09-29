@@ -2290,7 +2290,7 @@ GHC_INLINE path path::parent_path() const
         }
         else {
             path pp;
-            for (const string_type& s : input_iterator_range<iterator>(begin(), --end())) {
+            for (const auto& s : input_iterator_range<iterator>(begin(), --end())) {
                 if (s == "/") {
                     // don't use append to join a path-
                     pp += s;
@@ -2400,7 +2400,7 @@ GHC_INLINE bool path::is_relative() const
 GHC_INLINE path path::lexically_normal() const
 {
     path dest;
-    for (const string_type& s : *this) {
+    for (const auto& s : *this) {
         if (s == ".") {
             dest /= "";
             continue;
@@ -3152,7 +3152,7 @@ GHC_INLINE bool create_directories(const path& p, std::error_code& ec) noexcept
 {
     path current;
     ec.clear();
-    for (const std::string& part : p) {
+    for (const auto& part : p) {
         current /= part;
         if (current != p.root_name() && current != p.root_path()) {
             std::error_code tec;
